@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Backend\BackendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,14 @@ use App\Http\Controllers\Admin\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/admin',[AdminController::class, 'index'])->name('home');
+Route::get('/admin',[AdminController::class, 'index'])->name('dashboard');
+
+Route::get('/register',[BackendController::class, 'register'])->name('register');
+Route::post('/registersubmit',[BackendController::class, 'registersubmit'])->name('registersubmit');
+
+Route::get('/',[BackendController::class, 'login'])->name('login');
+Route::post('/loginsubmit',[BackendController::class, 'loginsubmit'])->name('loginsubmit');

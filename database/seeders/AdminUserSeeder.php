@@ -15,14 +15,16 @@ class AdminUserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'sujab',
+            'firstname' => 'sujab',
+            'lastname' => 'shrestha',
             'email' => 'ssujab9@gmail.com',
             'roles' => 'admin',
             'password' => bcrypt('testing1234'),
         ]);
 
         User::create([
-            'name' => 'admin',
+            'firstname' => 'admin',
+            'lastname' => 'admin',
             'email' => 'admin@gmail.com',
             'roles' => 'admin',
             'password' => bcrypt('testing1234'),
