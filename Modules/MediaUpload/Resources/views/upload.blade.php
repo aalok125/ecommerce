@@ -5,27 +5,99 @@
 @endpush
 
 @section('content')
+
+
+
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3"></div>
+
+        <div class="col-md-3 mt-4">
+            <h5 style="padding-left:30px;">All uploaded files</h5>
+        </div>
         <div class="col-md-6"></div>
         <div class="col-md-3 mt-3">
-            <a href="{{ route('filesupload')}}" type="button" class="btn form-control btn-primary" style="margin-top:4px;">Upload File</a>
+            <a href="{{ route('filesupload')}}" type="button" class="btn btn-primary"
+                style="margin-top:4px;width:150px;margin-left:107px;">Upload File</a>
         </div>
     </div>
 
-    <div class="row mt-4 pl-4">
+    <div class="container-fluid mt-2">
+        <div class="card bg-light mb-3" style="box-shadow: 4px 15px 54px -5px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 4px 15px 54px -5px rgba(0,0,0,0.75);
+        -moz-box-shadow: 4px 15px 54px -5px rgba(0,0,0,0.75);padding:20px;">
+            <div class="card-header row gutters-5">
+                <div class="col-md-3">
+                    <h5 class="mb-0 h6">All files</h5>
+                </div>
+                <div class="col-md-3 ml-auto mr-0">
+                    <div class="form-group">
 
-        @foreach($files as $file)
-        <div class="col-md-4 mb-5">
-            {{-- @if($file->extension ==) --}}
-            <img src="{{ asset($file->filename) }}" height="300px" width="300px" alt=""><br><br>
-            <a href="{{ route('filedelete',$file->id) }}" type="button" class="btn btn-primary pl-3" style="width: 300px;">Delete</a>
-            {{-- @dd($file) --}}
-        </div>
+                        <select class="form-control">
+                            <option>option 1</option>
+                            <option>option 2</option>
+                            <option>option 3</option>
+                            <option>option 4</option>
+                            <option>option 5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="form-group">
+                        <button class="btn btn-primary">Search</button>
+                    </div>
+                </div>
 
-        @endforeach
+            </div>
+            <div class="card-body">
+                <div class="row ml-2">
+                    @foreach($files as $file)
+                    <div class="col-auto w-130px w-lg-220px">
+                        <div class="file-box" style="width: 200px;">
+                            <div class="dropdown-file">
+
+                                <div class="dropdown-menu dropdown-menu-right" >
+                                    <a href="{{ route('filedelete',$file->id) }}" class="dropdown-item" style="text-decoration:none;color:black;">Delete</a>
+                                    <a href="" class="dropdown-item" style="text-decoration:none;color:black;">Download</a>
+                                </div>
+                                <a href="dropdown-link" data-toggle="dropdown" style="color: #5a5a5a;
+                                font-size: 22px;
+                                background: #f5f6fa;
+                                cursor: pointer;margin-left:180px;">
+                                    <i class="la la-ellipsis-v">...</i>
+                                </a>
+                            </div>
+                            <div class="card card-file">
+                                <div class="card-file-thumb" style="padding:10px;">
+                                    <img src="{{ asset($file->filename) }}" class="img-fit" height="150px" width="180px" alt="">
+                                </div>
+                                <div class="card-body" style=" height:50px;">
+
+                                    <h6 style="margin-top:-15px;">
+                                        <span class="text-truncate title">abc..</span>
+                                        <span class="ext">{{ $file->extension }}</span>
+                                        <p>{{ $file->file_size}}</p>
+
+                                    </h6>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    @endforeach
+                </div>
+
+            </div>
     </div>
+
+
 
 </div>
 
@@ -35,18 +107,22 @@
 <script src="{{ asset('dist/js/dropzone.js') }}"></script>
 
 <script>
-    $("div#myId").dropzone({ url: "/file/post" });
+    $("div#myId").dropzone({
+        url: "/file/post"
+    });
 
     Dropzone.options.myAwesomeDropzone = {
-    paramName: "file", // The name that will be used to transfer the file
-    maxFilesize: 2, // MB
-    accept: function(file, done) {
-        if (file.name == "justinbieber.jpg") {
-        done("Naha, you don't.");
+        paramName: "file", // The name that will be used to transfer the file
+        maxFilesize: 2, // MB
+        accept: function (file, done) {
+            if (file.name == "justinbieber.jpg") {
+                done("Naha, you don't.");
+            } else {
+                done();
+            }
         }
-        else { done(); }
-    }
     };
+
 </script>
 @endpush
 

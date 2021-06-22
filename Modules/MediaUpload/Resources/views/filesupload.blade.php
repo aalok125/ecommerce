@@ -6,13 +6,35 @@
 
 @section('content')
 <div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h6 class="pl-2">Upload New file</h6>
+        </div>
+        <div class="col-md-6 text-md-right">
+            <a href="{{ route('upload') }}" style="text-decoration: none;color:black;">
+                <i class="fas fa-angle-left"></i>
+                <span>Back to uploaded files</span>
+            </a>
+        </div>
+    </div>
+    <div class="card mt-3" style="box-shadow: 4px 15px 54px -5px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 4px 15px 54px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 15px 54px -5px rgba(0,0,0,0.75);padding:20px;">
+    <div class="card-header">
+        <h5 class="h6"> Drag & Drop your files here</h5>
+    </div>
+    <div class="card-body">
+        <form action="{{ route('filesubmit') }}" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data" style="height: 400px">
+            @csrf
 
-    <form action="{{ route('filesubmit') }}" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
-        @csrf
+        </form>
+    </div>
 
-    </form>
+    </div>
 
-    
+
+
+
 
 </div>
 
