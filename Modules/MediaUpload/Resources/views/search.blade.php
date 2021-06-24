@@ -59,7 +59,7 @@
             </div>
             <div class="card-body">
                 <div class="row ml-2">
-                    @foreach($files as $file)
+                    @foreach($images as $file)
                     <div class="col-auto w-130px w-lg-220px">
                         <div class="file-box" style="width: 200px;">
                             <div class="dropdown-file">
@@ -109,23 +109,6 @@
 @push('js')
 <script src="{{ asset('dist/js/dropzone.js') }}"></script>
 
-<script>
-    $("div#myId").dropzone({
-        url: "/file/post"
-    });
 
-    Dropzone.options.myAwesomeDropzone = {
-        paramName: "file", // The name that will be used to transfer the file
-        maxFilesize: 2, // MB
-        accept: function (file, done) {
-            if (file.name == "justinbieber.jpg") {
-                done("Naha, you don't.");
-            } else {
-                done();
-            }
-        }
-    };
-
-</script>
 @endpush
 

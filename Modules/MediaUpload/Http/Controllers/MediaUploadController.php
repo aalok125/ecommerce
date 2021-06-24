@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\MediaUpload\Entities\Upload;
 use Illuminate\Support\Facades\File;
+use Image;
 
 class MediaUploadController extends Controller
 {
@@ -43,11 +44,20 @@ class MediaUploadController extends Controller
      */
     public function filesubmit(Request $request)
     {
-        
+
 
         if($request->hasFile('file')){
             $requestedfile = $request->file;
             $filename =time().$requestedfile->GetClientOriginalName();
+
+            $thumbnailImage = Image::make($requestedfile);
+            $thumbnailPath = public_path().'/thumbnail/';
+            $originalPath = public_path().'/uploads/';
+            $thumbnailImage->save($originalPath.time().$requestedfile->getClientOriginalName());
+            $thumbnailImage->resize(150,150);
+            $thumbnailImage->save($thumbnailPath.time().$requestedfile->getClientOriginalName());
+
+
             $size = $requestedfile->getSize();
             $extension = $requestedfile->extension();
             $getFileType = $requestedfile->getMimeType();
@@ -61,7 +71,7 @@ class MediaUploadController extends Controller
                 'extension' => $extension,
                 'type' => $getFileType,
                 'user_id' => Auth::user()->id,
-                'fileoriginalname' => $requestedfile,
+                'fileoriginalname' =>time().$requestedfile->GetClientOriginalName(),
                 'filename' => $file,
                 'file_size' =>$size
             ]);
@@ -121,5 +131,22 @@ class MediaUploadController extends Controller
         $file->delete();
         return redirect()->back()->with('success','Deleted Successfully');
         //
+    }
+
+
+    public function search(Request $request){
+        if($request->image == "filename"){
+            $images = Upload::where('filename', 'like', '%' . $request->img_name . '%');
+
+        }elseif($request->image == "file_size"){
+            $images = Upload::where('file_size', 'like', '%' . $request->img_name . '%');
+        }elseif($request->image == "extension"){
+            $images = Upload::where('extension', 'like', '%' . $request->img_name . '%');
+        }else{
+            $images = Upload::all();
+        }
+
+        $images = $images->get();
+        return view('mediaupload::search',compact('images'));
     }
 }

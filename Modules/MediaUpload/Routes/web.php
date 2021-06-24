@@ -16,4 +16,5 @@ Route::prefix('mediaupload')->group(function() {
     Route::get('/delete/{id}', 'MediaUploadController@destroy')->name('filedelete');
     Route::get('/filesupload', 'MediaUploadController@filesupload')->name('filesupload');
     Route::post('/filesubmit', 'MediaUploadController@filesubmit')->name('filesubmit');
+    Route::post('/search', 'MediaUploadController@search')->name('search');
 });
