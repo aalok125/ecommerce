@@ -18,7 +18,7 @@ class MediaUploadController extends Controller
      */
     public function mediaupload()
     {
-        $files = Upload::all();
+        $files = Upload::simplePaginate(10);
         return view('mediaupload::upload',compact('files'));
     }
 
@@ -48,6 +48,7 @@ class MediaUploadController extends Controller
 
         if($request->hasFile('file')){
             $requestedfile = $request->file;
+            $f = $requestedfile->GetClientOriginalName();
             $filename =time().$requestedfile->GetClientOriginalName();
 
             $thumbnailImage = Image::make($requestedfile);
@@ -71,7 +72,7 @@ class MediaUploadController extends Controller
                 'extension' => $extension,
                 'type' => $getFileType,
                 'user_id' => Auth::user()->id,
-                'fileoriginalname' =>time().$requestedfile->GetClientOriginalName(),
+                'fileoriginalname' => pathinfo($f,PATHINFO_FILENAME),
                 'filename' => $file,
                 'file_size' =>$size
             ]);

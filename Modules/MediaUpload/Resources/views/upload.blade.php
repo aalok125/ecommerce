@@ -94,12 +94,18 @@
                         </div>
 
                     </div>
+
                     @endforeach
                 </div>
 
             </div>
-    </div>
+        <div class="col-10 pagination ml-4 mb-5">
+            {{ $files->links() }}
 
+        </div>
+
+
+    </div>
 
 
 </div>

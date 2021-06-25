@@ -11,6 +11,21 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block pt-2">
+          @if(Auth::check())
+          <div class="dropdown show">
+            <a class="dropdown-toggle" style="text-decoration: none;color:grey;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             {{ Auth::user()->firstname }}
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="#">logout</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+          @endif
+      </li>
     </ul>
 
     <!-- Right navbar links -->

@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Backend\BackendController;
+use Illuminate\Support\Facades\View;
+use Modules\SiteSetting\Entities\Sitesetting;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +29,11 @@ Route::post('/registersubmit',[BackendController::class, 'registersubmit'])->nam
 
 Route::get('/',[BackendController::class, 'login'])->name('login');
 Route::post('/loginsubmit',[BackendController::class, 'loginsubmit'])->name('loginsubmit');
+
+// View::composer('*', function ($view) {
+
+//     $sitesetting =Sitesetting::where('key','=','site_logo')->first();
+//     $sitefavicon = Sitesetting::where('key','=','site_favicon')->first();
+//     $view->with('sitesetting',$sitesetting);
+//     $view->with('sitefavicon',$sitefavicon);
+// });
